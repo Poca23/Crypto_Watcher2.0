@@ -6,7 +6,7 @@ export function startLoop(task) {
 
   const tick = async () => {
     const ok = await task();
-    delay = ok ? REFRESH_MS : Math.min(delay * 2, 30000);
+    delay = ok ? REFRESH_MS : Math.min(delay * 2, 50000);
     timer = setTimeout(tick, delay);
   };
 

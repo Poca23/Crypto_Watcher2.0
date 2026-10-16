@@ -7,7 +7,7 @@ export const CRYPTOS = [
   { symbol: "POL", name: "Polygon" },
 ];
 
-export const REFRESH_MS = 3000;
+export const REFRESH_MS = 5000;
 export const DEFAULT_CURRENCY = "EUR";
 
 export const SUGGESTIONS = [
