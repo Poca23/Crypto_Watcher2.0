@@ -1,0 +1,21 @@
+# Dépendances (au cas où un package.json serait ajouté)
+node_modules/
+package-lock.json
+
+# Variables d'environnement
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*~

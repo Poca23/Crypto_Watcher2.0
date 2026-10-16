@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Watcher 2.0</title>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/toolbar.css">
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/details.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/motion.css">
+</head>
+
+<body>
+    <header class="toolbar">
+        <h1>Crypto Watcher <span class="accent">2.0</span></h1>
+        <p id="status" class="status" aria-live="polite">● En direct</p>
+        <button id="currencyBtn" class="btn" aria-label="Changer de devise">EUR</button>
+        <button id="themeBtn" class="btn" aria-label="Changer de thème">Thème</button>
+    </header>
+    <form id="addForm" class="add-form">
+        <label for="addInput" class="add-title">Ajouter une cryptomonnaie</label>
+        <div class="add-row">
+            <input id="addInput" placeholder="Écrire un symbole (ex. SOL)" maxlength="10" autocomplete="off">
+            <span class="add-or">ou</span>
+            <select id="addSelect" aria-label="Choisir dans la liste"></select>
+        </div>
+        <button class="btn add-btn" type="submit">Ajouter</button>
+        <p id="addMsg" class="add-msg" aria-live="polite"></p>
+    </form>
+    <div id="chips" class="chips" aria-label="Suggestions de cryptomonnaies"></div>
+    <div id="chips" class="chips" aria-label="Suggestions de cryptomonnaies"></div>
+    <p class="legend">▲ en hausse · ▼ en baisse · ■ stable — variation depuis le prix précédent</p>
+    <main id="cards" class="cards"></main>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

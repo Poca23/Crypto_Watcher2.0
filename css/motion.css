@@ -1,0 +1,32 @@
+@keyframes flash-up {
+  from {
+    background: color-mix(in srgb, var(--up) 30%, transparent);
+  }
+}
+@keyframes flash-down {
+  from {
+    background: color-mix(in srgb, var(--down) 30%, transparent);
+  }
+}
+
+.flash-up {
+  animation: flash-up 0.8s ease-out;
+}
+.flash-down {
+  animation: flash-down 0.8s ease-out;
+}
+
+.card,
+.badge {
+  transition: border-color 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash-up,
+  .flash-down {
+    animation: none;
+  }
+  * {
+    transition: none !important;
+  }
+}
