@@ -105,6 +105,7 @@ Puis ouvrir l'adresse affichée (par exemple http://localhost:8000).
 
 ```
 index.html
+assets/  favicon.ico, logo.png
 css/
   tokens.css     couleurs, espacements, typographie (thèmes sombre / clair)
   base.css       reset, mise en page générale
