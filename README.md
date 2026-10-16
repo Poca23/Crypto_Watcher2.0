@@ -1,9 +1,16 @@
+<p align="center">
+  <img src="assets/logo.png" alt="Logo Crypto Watcher" width="96">
+</p>
+
 # 📈 Crypto Watcher 2.0
 
 Tableau de bord des cryptomonnaies en temps réel, pensé pour être lu en 3 secondes, même par un non-initié.
 Projet pédagogique CDA, Live Campus. JavaScript pur, aucune dépendance.
 
 > Seconde version du Crypto Watcher réalisé en janvier 2026 : mêmes fonctionnalités, code plus robuste et entièrement modulaire.
+
+**🌐 Démo en ligne : <https://cryptowatcher-2-0.netlify.app/>**
+**Statut : terminé et déployé (16 octobre 2026)**
 
 ---
 
@@ -12,15 +19,16 @@ Projet pédagogique CDA, Live Campus. JavaScript pur, aucune dépendance.
 1. [Aperçu](#aperçu)
 2. [Fonctionnalités](#fonctionnalités)
 3. [Technologies](#technologies)
-4. [Lancer le projet](#lancer-le-projet)
+4. [Démo et lancement](#démo-et-lancement)
 5. [Utilisation](#utilisation)
 6. [Architecture](#architecture)
 7. [Robustesse](#robustesse)
 8. [Accessibilité](#accessibilité)
 9. [Personnalisation](#personnalisation)
 10. [Choix techniques](#choix-techniques)
-11. [Apprentissages](#apprentissages)
-12. [Auteure](#auteure)
+11. [Évolutions possibles](#évolutions-possibles)
+12. [Apprentissages](#apprentissages)
+13. [Auteure](#auteure)
 
 ---
 
@@ -56,6 +64,7 @@ Design inspiré des écrans de trading (fond sombre, couleurs vives), avec une l
 | Thème               | Sombre / clair, suit le système au premier lancement                             |
 | Persistance         | Cryptos suivies, devise et thème mémorisés (`localStorage`)                      |
 | Statut de connexion | Indicateur « En direct » / erreur, sans popup                                    |
+| Identité visuelle   | Logo dans l'en-tête et favicon                                                   |
 
 Cryptos suivies par défaut : BTC, ETH, ADA, DOT, CRO, POL.
 Suggestions proposées : SOL, XRP, DOGE, LTC, LINK, AVAX, UNI, ATOM.
@@ -68,11 +77,19 @@ Suggestions proposées : SOL, XRP, DOGE, LTC, LINK, AVAX, UNI, ATOM.
 - **CSS3** : variables (tokens), un fichier par composant, mobile first
 - **JavaScript ES6+** : modules natifs, `fetch`, `async/await`
 - **API Coinbase** : `https://api.coinbase.com/v2/prices/{SYMBOL}-{DEVISE}/spot`
-- **Zéro dépendance externe**
+- **Zéro dépendance externe, aucune étape de build**
 
 ---
 
-## Lancer le projet
+## Démo et lancement
+
+### En ligne
+
+Application déployée : **<URL-DU-DEPLOIEMENT>**
+
+Le site est statique (HTML, CSS, JS) : tout hébergeur de fichiers statiques convient (GitHub Pages, Netlify, Vercel…). Aucune configuration serveur ni clé d'API n'est nécessaire.
+
+### En local
 
 Les modules ES exigent un serveur local (l'ouverture directe via `file://` ne fonctionne pas).
 
@@ -105,11 +122,13 @@ Puis ouvrir l'adresse affichée (par exemple http://localhost:8000).
 
 ```
 index.html
-assets/  favicon.ico, logo.png
+assets/
+  favicon.ico    icône de l'onglet
+  logo.png       logo de l'en-tête
 css/
   tokens.css     couleurs, espacements, typographie (thèmes sombre / clair)
   base.css       reset, mise en page générale
-  toolbar.css    barre d'outils
+  toolbar.css    barre d'outils et logo
   card.css       carte, pastille, sparkline
   details.css    panneau de détails
   form.css       formulaire d'ajout
@@ -173,7 +192,7 @@ scheduler ──► api/coinbase ──► store ──► abonnés (ui/cards, u
 - **Validation** du symbole (format, doublon) puis vérification auprès de l'API.
 - **Cas limites** : division par zéro, `-0,00 %`, prix manquant.
 - **Mises à jour ciblées** du DOM : pas de reconstruction, pas de clignotement.
-- **Suggestions stables** : la liste déroulante n'est reconstruite que si son contenu change, pour ne pas perdre la sélection en cours.
+- **Suggestions stables** : la liste déroulante n'est reconstruite que si son contenu change.
 - **Aucun `alert()`** : erreurs affichées dans l'interface.
 - **Historique sans doublon** : un prix inchangé n'est pas ajouté.
 
@@ -183,7 +202,7 @@ scheduler ──► api/coinbase ──► store ──► abonnés (ui/cards, u
 
 - Information jamais portée par la couleur seule (flèches et symboles).
 - `aria-live="polite"` sur le statut et les messages du formulaire.
-- Libellés explicites sur les boutons et champs.
+- Libellés explicites sur les boutons et champs ; logo décoratif (`alt=""`).
 - Focus visible, navigation au clavier, `Échap` pour fermer les détails.
 - Animations désactivées si `prefers-reduced-motion`.
 - Thème initial selon `prefers-color-scheme`.
@@ -198,6 +217,7 @@ scheduler ──► api/coinbase ──► store ──► abonnés (ui/cards, u
 | Changer la fréquence de mise à jour               | `REFRESH_MS` dans `js/config.js` |
 | Changer les couleurs ou créer un thème            | `css/tokens.css`                 |
 | Afficher plus de décimales                        | seuils dans `js/format.js`       |
+| Changer le logo ou le favicon                     | fichiers dans `assets/`          |
 
 ---
 
@@ -207,6 +227,18 @@ scheduler ──► api/coinbase ──► store ──► abonnés (ui/cards, u
 - **POL à la place de MATIC** : Polygon a migré vers POL.
 - **Polling plutôt que WebSocket** : plus simple, suffisant pour ce projet.
 - **Évolution depuis l'ouverture de la page** uniquement : pas de source de données supplémentaire.
+- **Aucun build** : les fichiers sources sont servis tels quels, le déploiement se limite à publier le dossier.
+
+---
+
+## Évolutions possibles
+
+Hors périmètre de cette version, volontairement :
+
+- Périodes historiques (24 h, 7 j) via l'API Coinbase
+- WebSocket Coinbase pour du temps réel sans polling
+- Alertes de prix, favoris, tri et recherche
+- Icône SVG pour le bouton de thème
 
 ---
 
@@ -218,6 +250,7 @@ scheduler ──► api/coinbase ──► store ──► abonnés (ui/cards, u
 - Gérer les erreurs et les cas limites sans interrompre l'application
 - Construire un système de styles modulaire avec des variables CSS
 - Penser l'accessibilité dès la conception
+- Mener un projet de l'analyse au déploiement
 
 ---
 
